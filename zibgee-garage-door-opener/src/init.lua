@@ -17,7 +17,7 @@ local ZigbeeDriver = require "st.zigbee"
 local capabilities = require "st.capabilities"
 
 local function added_handler(self, device)
-  device:emit_event(capabilities.windowShade.supportedWindowShadeCommands({"open", "close", "pause"}, { visibility = { displayed = false }}))
+  device:emit_event(capabilities.doorControl.supportedDoorControlCommands({"open", "close", "pause"}, { visibility = { displayed = false }}))
 end
 
 local driver_template = {
@@ -25,6 +25,7 @@ local driver_template = {
     capabilities.doorControl,
     capabilities.contactSensor,
     capabilities.firmwareUpdate,
+    capabilities.switch,
   },
   sub_drivers = {
     require("tuya-zb-gdo")

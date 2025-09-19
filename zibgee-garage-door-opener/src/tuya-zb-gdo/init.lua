@@ -18,6 +18,7 @@ local utils = require "st.utils"
 local tuya_utils = require "tuya_utils"
 local garage_door_opener_preset_defaults = require "st.zigbee.defaults.garageDoorOpenerPreset_defaults"
 local zcl_clusters = require "st.zigbee.zcl.clusters"
+
 local GarageDoorOpener = zcl_clusters.GarageDoorOpener
 local ep_array = {1,2,3,4,5,6}
 local packet_id = 0
@@ -29,9 +30,6 @@ local TUYA_ZIGBEE_GARAGE_DOOR_FINGERPRINTS = {
 
 local MOVE_LESS_THAN_THRESHOLD = "_sameLevelEvent"
 local FINAL_STATE_POLL_TIMER = "_finalStatePollTimer"
-
-local CONTACTSENSOR_BATTERY_LEVEL_NORMAL = 100
-local CONTACTSENSOR_BATTERY_LEVEL_LOW = 1
 
 local GDO_CONFIG_PARAMS = {
   closeWaitPeriodSec = 1,
@@ -88,9 +86,6 @@ end
 ---
 local function device_added(driver, device)
   device:send(BarrierOperator:Get({}))
-  -- Reset contact sensor battery level... This should be pollable on the GDO side.
-  device:emit_event_for_endpoint(CONTACTSENSOR_ENDPOINT_NUMBER,
-    capabilities.battery.battery(CONTACTSENSOR_BATTERY_LEVEL_NORMAL))
   -- Reset contact sensor fields
   device:emit_event_for_endpoint(CONTACTSENSOR_ENDPOINT_NUMBER,
     capabilities.tamperAlert.tamper.clear())
@@ -139,10 +134,6 @@ local function notification_report_handler(driver, device, cmd)
       end
     elseif (notificationType == Notification.notification_type.ACCESS_CONTROL) then
       if (notificationEvent ==
-          Notification.event.access_control.BARRIER_SENSOR_LOW_BATTERY_WARNING) then
-        barrier_event = capabilities.doorControl.door.closed()
-        contact_event = capabilities.battery.battery(CONTACTSENSOR_BATTERY_LEVEL_NORMAL)
-      elseif (notificationEvent ==
               Notification.event.access_control.BARRIER_SENSOR_NOT_DETECTED_SUPERVISORY_ERROR) then
         barrier_event = capabilities.doorControl.door.closed()
       end
@@ -172,10 +163,6 @@ local function notification_report_handler(driver, device, cmd)
       elseif (notificationEvent ==
               Notification.event.access_control.BARRIER_SENSOR_NOT_DETECTED_SUPERVISORY_ERROR) then
         barrier_event = capabilities.doorControl.door.closed()
-      elseif (notificationEvent ==
-              Notification.event.access_control.BARRIER_SENSOR_LOW_BATTERY_WARNING) then
-        barrier_event = capabilities.doorControl.door.closed()
-        contact_event = capabilities.battery.battery(CONTACTSENSOR_BATTERY_LEVEL_LOW)
       end
     end
   end
