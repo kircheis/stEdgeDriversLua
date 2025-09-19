@@ -1,6 +1,5 @@
-name: 'Zigbee Garage Door Opener'
-packageKey: 'zigbee-garage-door-opener'
+name: 'Tuya Zigbee Device'
+packageKey: 'tuya-zigbee-device'
 permissions:
   zigbee: {}
-description: "SmartThings driver for Zigbee garage door opener devices"
-vendorSupportInformation: "https://support.smartthings.com"
+description: "Driver for Tuya Zigbee garage door opener devices"

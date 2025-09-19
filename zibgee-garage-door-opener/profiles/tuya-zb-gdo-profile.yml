@@ -1,16 +1,30 @@
-name: mini-zb-gdo-profile
+name: tuya-zb-gdo-profile
 components:
   - id: main
     capabilities:
+    - id: button
+      version: 1
+    - id: switch
+      version: 1
     - id: doorControl
       version: 1
     - id: refresh
+      version: 1
+    - id: powerMeter
+      version: 1
+    - id: energyMeter
+      version: 1
+    - id: powerConsumptionReport
+      version: 1
+    - id: firmwareUpdate
       version: 1
     categories:
     - name: GarageDoor
   - id: sensor
     capabilities:
     - id: contactSensor
+      version: 1
+    - id: motionSensor
       version: 1
     - id: tamperAlert
       version: 1
@@ -65,8 +79,8 @@ preferences:
       maximum: 100
       default: 96
   - name: "applicationLevelRetries"
-    title: "Z-Wave Communication Retry Attempts"
-    description: "This adjusts the number of times the Garage Door Opener will try to communicate with the Smart Things Hub over the Z-Wave network before giving up. 0 means the device will try only one time. Note: The Z-Wave stack has some built-in retry mechanism, so this function is on top of that."
+    title: "Zigbee Communication Retry Attempts"
+    description: "This adjusts the number of times the Garage Door Opener will try to communicate with the Smart Things Hub over the Zigbee network before giving up. 0 means the device will try only one time. Note: The Zigbee stack has some built-in retry mechanism, so this function is on top of that."
     required: false
     preferenceType: integer
     definition:
