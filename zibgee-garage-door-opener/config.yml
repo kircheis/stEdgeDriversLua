@@ -1,0 +1,6 @@
+name: 'Zigbee Garage Door Opener'
+packageKey: 'zigbee-garage-door-opener'
+permissions:
+  zigbee: {}
+description: "SmartThings driver for Zigbee garage door opener devices"
+vendorSupportInformation: "https://support.smartthings.com"
