@@ -12,12 +12,14 @@
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
 
+local zcl_clusters = require "st.zigbee.zcl.clusters"
+local level = zcl_clusters.Level
 local capabilities = require "st.capabilities"
+
 local device_lib = require "st.device"
 local utils = require "st.utils"
-local tuya_utils = require "tuya_utils"
+local tuya_utils = require "zigbee-garage-door-opener.src.tuya_utils"
 local garage_door_opener_preset_defaults = require "st.zigbee.defaults.garageDoorOpenerPreset_defaults"
-local zcl_clusters = require "st.zigbee.zcl.clusters"
 
 local GarageDoorOpener = zcl_clusters.GarageDoorOpener
 local ep_array = {1,2,3,4,5,6}
@@ -316,7 +318,7 @@ local tuya_multi_switch_driver = {
     added = device_added,
     init = device_init,
   },
-  can_handle = is_tuya_switch
+  can_handle = is_tuya_zigbee_garage_door_opener
 }
 
 return tuya_multi_switch_driver

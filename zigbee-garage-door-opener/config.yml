@@ -1,5 +1,6 @@
 name: 'Tuya Zigbee Device'
 packageKey: 'tuya-zigbee-device'
+description: "Driver for Tuya Zigbee garage door opener devices"
+vendorSupportInformation: "iceilor"
 permissions:
   zigbee: {}
-description: "Driver for Tuya Zigbee garage door opener devices"

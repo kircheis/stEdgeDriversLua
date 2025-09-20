@@ -12,9 +12,9 @@
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
 
-local defaults = require "st.zigbee.defaults"
-local ZigbeeDriver = require "st.zigbee"
 local capabilities = require "st.capabilities"
+local ZigbeeDriver = require "st.zigbee"
+local defaults = require "st.zigbee.defaults"
 
 local function added_handler(self, device)
   device:emit_event(capabilities.doorControl.supportedDoorControlCommands({"open", "close", "pause"}, { visibility = { displayed = false }}))
@@ -22,12 +22,14 @@ end
 
 local driver_template = {
   supported_capabilities = {
-    capabilities.doorControl,
-    capabilities.contactSensor,
-    capabilities.firmwareUpdate,
+    capabilities.button,
     capabilities.switch,
+    capabilities.doorControl,
+    capabilities.powerMeter,
+    capabilities.firmwareUpdate,
+    capabilities.contactSensor,
   },
-  sub_drivers = {
+  sub_drivers = {    
     require("tuya-zb-gdo")
   },
   lifecycle_handlers = {
@@ -37,6 +39,5 @@ local driver_template = {
 }
 
 defaults.register_for_default_handlers(driver_template, driver_template.supported_capabilities)
-local zigbee_garage_door_opener = ZigbeeDriver("zigbee_garage_door_opener", driver_template)
+local zigbee_garage_door_opener = ZigbeeDriver(driver_template)
 zigbee_garage_door_opener:run()
-

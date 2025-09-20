@@ -1,0 +1,23 @@
+zigbeeManufacturer:
+  - id: "_TZE608_xkr8gep3/TS0603"
+    manufacturer: _TZE608_xkr8gep3
+    model: TS0603    
+    deviceProfileName: { tuya-zb-gdo-profile }
+    deviceLabel: { Garage Door Opener }
+    zigbeeProfiles:
+      - 0xF1A6 #Profile ID
+    deviceIdentifiers:
+      - 0x0051 #Device ID
+    clusters:
+      server:
+        - 0x0000 #Basic
+        - 0x0003 #Identify
+        - 0x0004 #Groups
+        - 0x0005 #Scenes
+        - 0xEF00 #TuyaEF00
+      client:
+        - 0x0019 #OTAUpgrade
+        - 0x000A #Time
+        - 0x0021 #BindRequest
+
+    
